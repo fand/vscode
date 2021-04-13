@@ -171,7 +171,7 @@ export class CodeWindow extends Disposable implements ICodeWindow {
 
 			const windowSettings = this.configurationService.getValue<IWindowSettings | undefined>('window');
 
-			const options: BrowserWindowConstructorOptions = {
+			let options: BrowserWindowConstructorOptions = {
 				width: this.windowState.width,
 				height: this.windowState.height,
 				x: this.windowState.x,
@@ -246,6 +246,15 @@ export class CodeWindow extends Disposable implements ICodeWindow {
 					options.frame = false;
 				}
 			}
+
+			options = {
+				...options,
+				backgroundColor: '#00000000',
+				frame: false,
+				transparent: true,
+				hasShadow: false,
+				thickFrame: false,
+			};
 
 			// Create the browser window.
 			this._win = new BrowserWindow(options);
